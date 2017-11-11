@@ -4,21 +4,20 @@ import java.util.Scanner;
 
 public class Prototype {
 	public static void main(String[] args) throws Exception {
-		
-		Process dump = new ProcessBuilder("windump", "-i", "1", "-n", "-l")
+		Process dump = new ProcessBuilder("windump", "-i", "2", "-n", "-l")
 				.start();
-		
 		
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(dump.getInputStream()));
 		
 		String s;
 		
-		Scanner portScanner = new Scanner(br);
+//		Scanner portScanner = new Scanner(br);
 		
 		while ((s = br.readLine()) != null) {
 			
 			System.out.println(s);
+			System.out.println("-----------");
 			
 		}
 		
