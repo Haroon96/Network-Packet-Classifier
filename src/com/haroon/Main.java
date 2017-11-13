@@ -1,8 +1,9 @@
 package com.haroon;
 
 import com.haroon.container.Packet;
-import com.haroon.process.packetdump.PacketDump;
-import com.haroon.process.packetdump.WinDump;
+import com.haroon.packetdump.PacketDump;
+import com.haroon.packetdump.WinDump;
+import com.haroon.ui.MainWindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +17,8 @@ public class Main implements PacketDump.CallbackInterface {
 	PacketDump dump;
 	
 	public static void main(String[] args) throws Exception {
-		new Main().run();
+		//new Main().run();
+		new MainWindow().launch();
 	}
 	
 	Main() {
