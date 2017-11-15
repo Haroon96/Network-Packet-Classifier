@@ -1,0 +1,17 @@
+<protocols>
+	<protocol>
+		<name>HTTP</name>
+		<port>80</port>
+		<selected>true</selected>
+	</protocol>
+	<protocol>
+		<name>FTP Control</name>
+		<port>21</port>
+		<selected>true</selected>
+	</protocol>
+	<protocol>
+		<name>FTP Data</name>
+		<port>20</port>
+		<selected>false</selected>
+	</protocol>
+</protocols>
