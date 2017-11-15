@@ -2,33 +2,28 @@ package com.haroon.ui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class MainWindow {
 	
 	private JPanel panel1;
 	private JPanel graphPanel;
 	
+	private HashMap<String, XYChart.Series> hashmap;
+	
+	public MainWindow() {
+		hashmap = new HashMap<>();
+	}
+	
 	public void launch() {
 		JFrame frame = new JFrame("MainWindow");
 		frame.setMinimumSize(new Dimension(450, 500));
 		frame.setContentPane(new MainWindow().panel1);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		LineChart lc = new LineChart();
-		
-		lc.init();
-		
-		lc.addSeries("hello");
-		
-		JFXPanel jp = new JFXPanel();
-		jp.setScene(new Scene(lc.getLineChart()));
-		graphPanel.add(jp);
-		
 		frame.pack();
 		frame.setVisible(true);
 	}

@@ -67,7 +67,7 @@ public class Prototype {
 		
 		lc = new AreaChart<>(xAxis, yAxis);
 	
-		lc.setCreateSymbols(false);
+//		lc.setCreateSymbols(false);
 		
 	//	xAxis.setGapStartAndEnd(false);
 //		xAxis.setStartMargin(0);
@@ -86,7 +86,7 @@ public class Prototype {
 		lc.getData().add(series);
 		lc.getData().add(series2);
 		
-		lc.setAnimated(false);
+	//	lc.setAnimated(false);
 		
 		return scene;
 	}
