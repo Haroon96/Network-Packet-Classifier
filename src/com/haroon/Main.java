@@ -1,35 +1,43 @@
 package com.haroon;
 
+import com.haroon.config.Configuration;
 import com.haroon.container.Packet;
+import com.haroon.container.Protocol;
 import com.haroon.packetdump.PacketDump;
-import com.haroon.packetdump.WinDump;
+import com.haroon.ui.SetupWindow;
 import com.haroon.ui.MainWindow;
+import com.haroon.ui.interfaces.MessageInterface;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Main implements PacketDump.CallbackInterface {
+public class Main implements PacketDump.CallbackInterface, Configuration.ProtocolLoadInterface, MessageInterface {
 	
-	// Vector is synchronized
+	private static SetupWindow setupWindow;
+	private static MainWindow mainWindow;
+	
 	LinkedBlockingQueue<String> queue;
 	ArrayList<Packet> packets;
 	PacketDump dump;
 	
+	static {
+		setupWindow = new SetupWindow();
+		mainWindow = new MainWindow();
+	}
+	
 	public static void main(String[] args) throws Exception {
-		//new Main().run();
-		new MainWindow().launch();
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		setupWindow.show();
+		new Main().run();
 	}
 	
 	Main() {
-		queue = new LinkedBlockingQueue<>();
-		packets = new ArrayList<>();
-		dump = new WinDump(new ArrayList<>(Arrays.asList("-i", "2", "-n", "-l", "-q", "tcp", "or", "udp")));
-		dump.setCallback(this);
+		Configuration.load(this, this);
 	}
 	
 	public void run() throws Exception {
-		dump.start();
+/*		dump.start();
 		String str;
 		while (true) {
 			
@@ -40,6 +48,26 @@ public class Main implements PacketDump.CallbackInterface {
 			System.out.println(packets.get(packets.size() - 1));
 			System.out.println("--------------------------------");
 			
+		}*/
+	}
+	
+	@Override
+	public void protocolsLoaded(ArrayList<Protocol> protocols) {
+		setupWindow.hide();
+		mainWindow.show();
+	}
+	
+	@Override
+	public void report(String message) {
+		JFrame frame = null;
+		if (setupWindow.isVisible()) {
+			frame = setupWindow.getFrame();
+		} else if (mainWindow.isVisible()) {
+			frame = mainWindow.getFrame();
+		}
+		
+		if (frame != null) {
+			JOptionPane.showMessageDialog(frame, message);
 		}
 	}
 	
