@@ -12,6 +12,16 @@
 	<protocol>
 		<name>FTP Data</name>
 		<port>20</port>
-		<selected>false</selected>
+		<selected>true</selected>
+	</protocol>
+	<protocol>
+		<name>RDP</name>
+		<port>3389</port>
+		<selected>true</selected>
+	</protocol>
+	<protocol>
+		<name>HTTPS</name>
+		<port>443</port>
+		<selected>true</selected>
 	</protocol>
 </protocols>

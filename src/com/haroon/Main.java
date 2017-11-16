@@ -1,9 +1,11 @@
 package com.haroon;
 
 import com.haroon.config.Configuration;
+import com.haroon.container.Interface;
 import com.haroon.container.Packet;
 import com.haroon.container.Protocol;
 import com.haroon.packetdump.PacketDump;
+import com.haroon.packetdump.WinDump;
 import com.haroon.ui.SetupWindow;
 import com.haroon.ui.MainWindow;
 import com.haroon.ui.interfaces.MessageInterface;
@@ -33,7 +35,20 @@ public class Main implements PacketDump.CallbackInterface, Configuration.Protoco
 	}
 	
 	Main() {
-		Configuration.load(this, this);
+		new Thread(()->{
+			try {
+				ArrayList<Interface> interfaces = new WinDump().listInterfaces();
+				
+				for (Interface i : interfaces) {
+					mainWindow.addInterface(i);
+				}
+				
+			} catch(Exception e) {
+				report("Failed to read network interfaces.");
+				System.exit(1);
+			}
+			Configuration.load(Main.this, Main.this);
+		}).start();
 	}
 	
 	public void run() throws Exception {

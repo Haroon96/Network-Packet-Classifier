@@ -35,6 +35,7 @@ public class Configuration {
 	public static void save() {
 	}
 	
+	
 	public static void load(ProtocolLoadInterface pli, MessageInterface msgi) {
 		
 		ArrayList<Protocol> protocols = new ArrayList<>();
@@ -88,11 +89,12 @@ public class Configuration {
 		void protocolsLoaded(ArrayList<Protocol> protocols);
 	}
 	
-	public static void main(String[] args) throws Exception {
-	
+	public static ArrayList<Protocol> getSelectedProtocols() {
+		return selectedProtocols;
 	}
 	
 	
-	public static ArrayList<Protocol> selectedProtocols;
+	private static ArrayList<Protocol> selectedProtocols;
+	
 	
 }

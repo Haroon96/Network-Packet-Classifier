@@ -11,6 +11,10 @@ public class WinDump extends PacketDump {
 		setProcessName("windump");
 	}
 	
+	public WinDump() {
+		setProcessName("windump");
+	}
+	
 	@Override
 	public ArrayList<Interface> listInterfaces() throws Exception {
 		ArrayList<Interface> interfaces = super.listInterfaces();

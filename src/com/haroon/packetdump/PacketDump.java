@@ -13,6 +13,10 @@ public abstract class PacketDump extends Thread {
 	private String process_name;
 	private CallbackInterface callback;
 	
+	protected PacketDump() {
+	
+	}
+	
 	protected PacketDump(ArrayList<String> command) {
 		this.command = command;
 		this.process_name = null;
@@ -22,7 +26,8 @@ public abstract class PacketDump extends Thread {
 	
 	protected void setProcessName(String process_name) {
 		this.process_name = process_name;
-		command.add(0, process_name);
+		if (command != null)
+			command.add(0, process_name);
 	}
 	
 	public void setCallback(CallbackInterface callback) {

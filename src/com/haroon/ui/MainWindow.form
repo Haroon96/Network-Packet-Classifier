@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.haroon.ui.MainWindow">
-  <grid id="27dc6" binding="panel1" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel1" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
@@ -12,7 +12,7 @@
     <children>
       <grid id="a5e5b" binding="graphPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-723724"/>
@@ -20,48 +20,89 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="519f6" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="519f6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-723724"/>
         </properties>
         <border type="none"/>
         <children>
-          <component id="c181c" class="javax.swing.JButton" binding="start_stop_btn">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
+          <component id="59a3f" class="javax.swing.JButton" binding="pie_btn">
+            <constraints/>
             <properties>
-              <text value="Button"/>
+              <icon value="pie_chart.png"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="fd01f" class="javax.swing.JButton" binding="log_btn">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
+          <component id="927af" class="javax.swing.JButton" binding="line_btn">
+            <constraints/>
             <properties>
-              <text value="Button"/>
+              <icon value="line_chart.png"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="f82b4" class="javax.swing.JButton" binding="exit_btn">
-            <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
+          <component id="8b06f" class="javax.swing.JButton" binding="area_btn">
+            <constraints/>
             <properties>
-              <text value="Button"/>
+              <icon value="area_chart.png"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="ace6a" class="javax.swing.JButton" binding="settings_btn">
+        </children>
+      </grid>
+      <grid id="15481" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-723724"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="b60fe" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <background color="-723724"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children>
+              <component id="11ee4" class="javax.swing.JButton" binding="start_stop_btn">
+                <constraints/>
+                <properties>
+                  <background color="-723724"/>
+                  <horizontalAlignment value="0"/>
+                  <icon value="start_icon.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="aebd8" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-723724"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="deecb" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Interface"/>
+                </properties>
+              </component>
+              <component id="dc5e6" class="javax.swing.JComboBox" binding="interfaceComboBox">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>
