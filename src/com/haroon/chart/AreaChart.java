@@ -13,7 +13,7 @@ public class AreaChart {
 	private static Scene scene;
 	
 	static {
-		xAxis = new NumberAxis(-10,  0,  1);
+		xAxis = new NumberAxis(-100,0,1);
 		yAxis = new NumberAxis(0, 100, 10);
 		areaChart = new javafx.scene.chart.AreaChart<>(xAxis, yAxis);
 		scene = new Scene(areaChart);
@@ -29,7 +29,7 @@ public class AreaChart {
 		Platform.runLater(()->{
 			areaChart.getData().clear();
 		});
-		xAxis.setLowerBound(-10);
+		xAxis.setLowerBound(-100);
 		xAxis.setUpperBound(0);
 	}
 	

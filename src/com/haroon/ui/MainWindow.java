@@ -2,17 +2,16 @@ package com.haroon.ui;
 
 import com.haroon.chart.AreaChart;
 import com.haroon.chart.LineChart;
+import com.haroon.chart.PieChart;
 import com.haroon.config.Configuration;
-import com.haroon.container.Counter;
-import com.haroon.container.Interface;
-import com.haroon.container.Packet;
-import com.haroon.container.Protocol;
+import com.haroon.container.*;
 import com.haroon.packetdump.PacketDump;
 import com.haroon.packetdump.WinDump;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import javax.swing.*;
@@ -47,7 +46,7 @@ public class MainWindow {
 	private boolean started;
 	private boolean continue_running;
 	
-	private HashMap<String, XYChart.Series> hashmap;
+	private HashMap<String, Series> hashmap;
 	
 	public JFrame getFrame() {
 		return frame;
@@ -76,6 +75,15 @@ public class MainWindow {
 	}
 	
 	private void setListeners() {
+		line_btn.addActionListener((ActionEvent e) -> {
+			jfxPanel.setScene(LineChart.getScene());
+		});
+		area_btn.addActionListener((ActionEvent e) -> {
+			jfxPanel.setScene(AreaChart.getScene());
+		});
+		pie_btn.addActionListener((ActionEvent e) -> {
+			jfxPanel.setScene(PieChart.getScene());
+		});
 		start_stop_btn.addActionListener((ActionEvent e) -> {
 			if (started) {
 				// stop
@@ -97,14 +105,15 @@ public class MainWindow {
 				
 				LineChart.init();
 				AreaChart.init();
+				PieChart.init();
 				packets.clear();
 				
 				for (Protocol p : Configuration.getSelectedProtocols()) {
-					XYChart.Series<Integer, Integer> series = new XYChart.Series<>();
+					Series series = new Series();
 					series.setName(p.getName());
 					hashmap.put(Integer.toString(p.getPort()), series);
-				//	LineChart.addSeries(series);
-					AreaChart.addSeries(series);
+					LineChart.addSeries(series.lineChartSeries);
+					AreaChart.addSeries(series.areaChartSeries);
 				}
 				
 				new Thread(() -> {
@@ -113,18 +122,25 @@ public class MainWindow {
 					ArrayList<Packet> dump = new ArrayList<>();
 					ArrayList<Counter> counters = new ArrayList<>();
 					
+					PieChart.addCategory("Unclassified");
 					for (Protocol proto : getSelectedProtocols()) {
 						counters.add(new Counter(proto.getPort()));
+						PieChart.addCategory(proto.getName());
 					}
 					
 					while (continue_running) {
 						try {
 							Thread.sleep(1000);
+							if (continue_running == false) {
+								continue;
+							}
 							synchronized (packets) {
 								dump.addAll(packets);
 								packets.clear();
 							}
+							
 							total_packets = dump.size();
+							
 							if (total_packets == 0) {
 								continue;
 							}
@@ -136,15 +152,23 @@ public class MainWindow {
 									}
 								}
 							}
+							
 							AreaChart.move();
+							LineChart.move();
+							int sum_for_pie = 0;
 							for (Counter c : counters) {
+								sum_for_pie += c.getCount();
 								float percent = ((float) c.getCount() / total_packets) * 100f;
-								XYChart.Series series = hashmap.get(Integer.toString(c.getPort()));
+								System.out.println(percent);
+								Series series = hashmap.get(Integer.toString(c.getPort()));
+								PieChart.addData(series.getName(), c.getCount());
 								Platform.runLater(() -> {
-									series.getData().add(new XYChart.Data<>(interval, percent));
+									series.lineChartSeries.getData().add(new XYChart.Data(interval, percent));
+									series.areaChartSeries.getData().add(new XYChart.Data(interval, percent));
 								});
 								c.reset();
 							}
+							PieChart.addData("Unclassified", total_packets - sum_for_pie);
 							++interval;
 						} catch (Exception e2) {
 						

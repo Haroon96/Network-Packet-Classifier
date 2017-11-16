@@ -13,7 +13,7 @@ public class LineChart {
 	private static Scene scene;
 	
 	static {
-		xAxis = new NumberAxis(-10,  0,  1);
+		xAxis = new NumberAxis(-100,  0,  1);
 		yAxis = new NumberAxis(0, 100, 10);
 		lineChart = new javafx.scene.chart.LineChart(xAxis, yAxis);
 		scene = new Scene(lineChart);
@@ -29,7 +29,7 @@ public class LineChart {
 		Platform.runLater(()->{
 			lineChart.getData().clear();
 		});
-		xAxis.setLowerBound(-10);
+		xAxis.setLowerBound(-100);
 		xAxis.setUpperBound(0);
 	}
 	

@@ -14,8 +14,7 @@ import java.util.Random;
 
 public class Prototype {
 	
-	private static AreaChart<Number, Number> lc;
-	private static XYChart.Series<Number, Number> series, series2;
+	private static PieChart pc;
 	private static Random random = new Random();
 	private static int i = 0;
 	
@@ -32,28 +31,6 @@ public class Prototype {
 		jfxpanel.setScene(scene);
 		
 		
-		new Thread(()-> {
-				try {
-					while (true) {
-						Thread.sleep(1000);
-						Platform.runLater(()->{
-							if (series.getData().size() == 10) {
-								series.getData().remove(0);
-								series2.getData().remove(0);
-							}
-							double lb = ((NumberAxis)lc.getXAxis()).getLowerBound();
-							double ub = ((NumberAxis)lc.getXAxis()).getUpperBound();
-							((NumberAxis)lc.getXAxis()).setLowerBound(lb + 1);
-							((NumberAxis)lc.getXAxis()).setUpperBound(ub + 1);
-							++i;
-							series.getData().add(new XYChart.Data<>(i, random.nextInt(100)));
-							series2.getData().add(new XYChart.Data<>(i, random.nextInt(100)));
-						});
-					}
-				} catch (Exception e) {
-				
-				}
-		}).start();
 		
 		jframe.add(jfxpanel);
 		jframe.setVisible(true);
@@ -61,34 +38,11 @@ public class Prototype {
 	
 	static Scene getScene() {
 		
-		NumberAxis xAxis = new NumberAxis(-10, 0, 1);
-		NumberAxis yAxis = new NumberAxis(0,100,10);
+		pc = new PieChart();
+		pc.getData().add(new PieChart.Data("HELLO", 1));
+		pc.getData().add(new PieChart.Data("BYE", 2));
 		
-		
-		lc = new AreaChart<>(xAxis, yAxis);
-	
-		lc.setCreateSymbols(false);
-		
-	//	xAxis.setGapStartAndEnd(false);
-//		xAxis.setStartMargin(0);
-		
-		Scene scene = new Scene(lc, 500, 500);
-		
-		series = new XYChart.Series<>();
-		series2 = new XYChart.Series<>();
-		
-		series.getData().add(new XYChart.Data<>(0,0));
-		series2.getData().add(new XYChart.Data<>(0,0));
-		
-		series.setName("HTTP");
-		series2.setName("FTP");
-		
-		lc.getData().add(series);
-		lc.getData().add(series2);
-		
-	//	lc.setAnimated(false);
-		
-		return scene;
+		return new Scene(pc);
 	}
 	
 }
