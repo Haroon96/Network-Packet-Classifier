@@ -60,7 +60,7 @@ public class LogWindow {
 		textArea1.setEnabled(true);
 		scrollPane1.setViewportView(textArea1);
 		closeBtn = new JButton();
-		closeBtn.setText("Button");
+		closeBtn.setText("Close");
 		panel1.add(closeBtn, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 	}
 	

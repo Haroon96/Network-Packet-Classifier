@@ -130,13 +130,7 @@ public class ConfigurationWindow {
 	 */
 	private void $$$setupUI$$$() {
 		panel = new JPanel();
-		panel.setLayout(new GridLayoutManager(11, 3, new Insets(10, 10, 10, 10), -1, -1));
-		allList = new JList();
-		panel.add(allList, new GridConstraints(1, 0, 9, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-		selectedList = new JList();
-		final DefaultListModel defaultListModel1 = new DefaultListModel();
-		selectedList.setModel(defaultListModel1);
-		panel.add(selectedList, new GridConstraints(1, 2, 9, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+		panel.setLayout(new GridLayoutManager(12, 3, new Insets(10, 10, 10, 10), -1, -1));
 		addBtn = new JButton();
 		addBtn.setText("Add >>");
 		panel.add(addBtn, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -204,9 +198,19 @@ public class ConfigurationWindow {
 		panel.add(label5, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		saveBtn = new JButton();
 		saveBtn.setText("Save");
-		panel.add(saveBtn, new GridConstraints(10, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		panel.add(saveBtn, new GridConstraints(11, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer2 = new Spacer();
 		panel.add(spacer2, new GridConstraints(8, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final JScrollPane scrollPane1 = new JScrollPane();
+		panel.add(scrollPane1, new GridConstraints(1, 0, 10, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		allList = new JList();
+		scrollPane1.setViewportView(allList);
+		final JScrollPane scrollPane2 = new JScrollPane();
+		panel.add(scrollPane2, new GridConstraints(1, 2, 10, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		selectedList = new JList();
+		final DefaultListModel defaultListModel1 = new DefaultListModel();
+		selectedList.setModel(defaultListModel1);
+		scrollPane2.setViewportView(selectedList);
 	}
 	
 	/**
