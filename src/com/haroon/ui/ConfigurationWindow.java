@@ -78,7 +78,7 @@ public class ConfigurationWindow {
 			try {
 				port = Integer.parseInt(portField.getText());
 			} catch (NumberFormatException e2) {
-				JOptionPane.showMessageDialog(frame, c"Invalid port number");
+				JOptionPane.showMessageDialog(frame, "Invalid port number");
 				return;
 			}
 			allListModel.addElement(new Protocol(name, port));
