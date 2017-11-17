@@ -10,7 +10,7 @@ import java.awt.*;
 public class SetupWindow {
 	private JPanel panel1;
 	private JFrame frame;
-	
+
 	public void show() {
 		frame = new JFrame("Network Packet Classifier");
 		frame.setContentPane(panel1);

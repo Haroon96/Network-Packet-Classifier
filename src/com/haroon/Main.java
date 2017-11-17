@@ -6,6 +6,7 @@ import com.haroon.container.Packet;
 import com.haroon.container.Protocol;
 import com.haroon.packetdump.PacketDump;
 import com.haroon.packetdump.WinDump;
+import com.haroon.packetdump.TcpDump;
 import com.haroon.ui.SetupWindow;
 import com.haroon.ui.MainWindow;
 import com.haroon.ui.interfaces.MessageInterface;
@@ -37,7 +38,12 @@ public class Main implements Runnable, PacketDump.CallbackInterface, Configurati
 	@Override
 	public void run() {
 		try {
-			ArrayList<Interface> interfaces = new WinDump().listInterfaces();
+			ArrayList<Interface> interfaces = null;
+			if (Configuration.getOS() == Configuration.WINDOWS) {
+				interfaces = new WinDump().listInterfaces();
+			} else {
+				interfaces = new TcpDump().listInterfaces();
+			}
 			
 			for (Interface i : interfaces) {
 				mainWindow.addInterface(i);

@@ -6,6 +6,7 @@ import com.haroon.chart.PieChart;
 import com.haroon.config.Configuration;
 import com.haroon.container.*;
 import com.haroon.packetdump.PacketDump;
+import com.haroon.packetdump.TcpDump;
 import com.haroon.packetdump.WinDump;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -114,8 +115,8 @@ public class MainWindow {
 				continue_running = true;
 				if (Configuration.getOS() == WINDOWS) {
 					packetDump = new WinDump(new ArrayList<>(Arrays.asList("-i", Integer.toString(interfaceComboBox.getSelectedIndex() + 1), "-n", "-l", "-q", "tcp", "or", "udp")));
-				} else if (Configuration.getOS() == LINUX) {
-					//TODO: add linux tcpdump
+				} else {
+					packetDump = new TcpDump(new ArrayList<>(Arrays.asList("-i", Integer.toString(interfaceComboBox.getSelectedIndex() + 1), "-n", "-l", "-q", "tcp", "or", "udp")));
 				}
 				
 				LineChart.init();
