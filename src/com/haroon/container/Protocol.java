@@ -5,6 +5,7 @@ public class Protocol {
 	public Protocol(String name, int port) {
 		this.name = name;
 		this.port = port;
+		this.selected = false;
 	}
 	
 	public Protocol(String name, int port, boolean selected) {
@@ -16,8 +17,12 @@ public class Protocol {
 	private int port;
 	private boolean selected;
 	
-	public void toggleSelect() {
-		selected = !selected;
+	public void select() {
+		this.selected = true;
+	}
+	
+	public void deselect() {
+		this.selected = false;
 	}
 	
 	public boolean isSelected() {
@@ -34,6 +39,6 @@ public class Protocol {
 	
 	@Override
 	public String toString() {
-		return name + " " + port + " " + selected;
+		return name + ", " + port;
 	}
 }

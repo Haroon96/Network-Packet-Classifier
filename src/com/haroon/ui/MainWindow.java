@@ -11,13 +11,11 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,6 +33,7 @@ public class MainWindow {
 	private JButton line_btn;
 	private JButton area_btn;
 	private JButton pie_btn;
+	private JButton settings_btn;
 	private JFrame frame;
 	private JFXPanel jfxPanel;
 	
@@ -57,6 +56,12 @@ public class MainWindow {
 		jfxPanel = new JFXPanel();
 		packets = new ArrayList<>();
 		started = false;
+		
+		start_stop_btn.setFocusPainted(false);
+		line_btn.setFocusPainted(false);
+		area_btn.setFocusPainted(false);
+		pie_btn.setFocusPainted(false);
+		settings_btn.setFocusPainted(false);
 	}
 	
 	public void show() {
@@ -75,6 +80,9 @@ public class MainWindow {
 	}
 	
 	private void setListeners() {
+		settings_btn.addActionListener((ActionEvent e) -> {
+			new ConfigurationWindow().show();
+		});
 		line_btn.addActionListener((ActionEvent e) -> {
 			jfxPanel.setScene(LineChart.getScene());
 		});
@@ -90,12 +98,14 @@ public class MainWindow {
 				continue_running = false;
 				start_stop_btn.setIcon(new ImageIcon("resources/start_icon.png"));
 				interfaceComboBox.setEnabled(true);
+				settings_btn.setEnabled(true);
 				packetDump.exitProcess();
 				hashmap.clear();
 			} else {
 				// start
 				start_stop_btn.setIcon(new ImageIcon("resources/stop_icon.png"));
 				interfaceComboBox.setEnabled(false);
+				settings_btn.setEnabled(false);
 				continue_running = true;
 				if (Configuration.getOS() == WINDOWS) {
 					packetDump = new WinDump(new ArrayList<>(Arrays.asList("-i", Integer.toString(interfaceComboBox.getSelectedIndex() + 1), "-n", "-l", "-q", "tcp", "or", "udp")));
@@ -224,44 +234,53 @@ public class MainWindow {
 		graphPanel.setBackground(new Color(-723724));
 		panel1.add(graphPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final JPanel panel2 = new JPanel();
-		panel2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		panel2.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
 		panel2.setBackground(new Color(-723724));
 		panel1.add(panel2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final JPanel panel3 = new JPanel();
+		panel3.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+		panel2.add(panel3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		pie_btn = new JButton();
 		pie_btn.setIcon(new ImageIcon(getClass().getResource("/pie_chart.png")));
 		pie_btn.setText("");
-		panel2.add(pie_btn);
+		panel3.add(pie_btn, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		line_btn = new JButton();
 		line_btn.setIcon(new ImageIcon(getClass().getResource("/line_chart.png")));
 		line_btn.setText("");
-		panel2.add(line_btn);
+		panel3.add(line_btn, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		area_btn = new JButton();
 		area_btn.setIcon(new ImageIcon(getClass().getResource("/area_chart.png")));
 		area_btn.setText("");
-		panel2.add(area_btn);
-		final JPanel panel3 = new JPanel();
-		panel3.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-		panel3.setBackground(new Color(-723724));
-		panel1.add(panel3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		panel3.add(area_btn, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		final JPanel panel4 = new JPanel();
-		panel4.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		panel4.setBackground(new Color(-723724));
-		panel3.add(panel4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		panel4.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+		panel2.add(panel4, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		settings_btn = new JButton();
+		settings_btn.setIcon(new ImageIcon(getClass().getResource("/settings_icon.png")));
+		settings_btn.setText("");
+		panel4.add(settings_btn, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final JPanel panel5 = new JPanel();
+		panel5.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+		panel5.setBackground(new Color(-723724));
+		panel1.add(panel5, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final JPanel panel6 = new JPanel();
+		panel6.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		panel6.setBackground(new Color(-723724));
+		panel5.add(panel6, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		start_stop_btn = new JButton();
-		start_stop_btn.setBackground(new Color(-723724));
 		start_stop_btn.setHorizontalAlignment(0);
 		start_stop_btn.setIcon(new ImageIcon(getClass().getResource("/start_icon.png")));
 		start_stop_btn.setText("");
-		panel4.add(start_stop_btn);
-		final JPanel panel5 = new JPanel();
-		panel5.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-		panel5.setBackground(new Color(-723724));
-		panel3.add(panel5, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		panel6.add(start_stop_btn);
+		final JPanel panel7 = new JPanel();
+		panel7.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		panel7.setBackground(new Color(-723724));
+		panel5.add(panel7, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		final JLabel label1 = new JLabel();
 		label1.setText("Interface");
-		panel5.add(label1);
+		panel7.add(label1);
 		interfaceComboBox = new JComboBox();
-		panel5.add(interfaceComboBox);
+		panel7.add(interfaceComboBox);
 	}
 	
 	/**

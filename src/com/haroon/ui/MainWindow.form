@@ -20,7 +20,8 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="519f6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+      <grid id="519f6" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -29,27 +30,62 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="59a3f" class="javax.swing.JButton" binding="pie_btn">
-            <constraints/>
-            <properties>
-              <icon value="pie_chart.png"/>
-              <text value=""/>
-            </properties>
-          </component>
-          <component id="927af" class="javax.swing.JButton" binding="line_btn">
-            <constraints/>
-            <properties>
-              <icon value="line_chart.png"/>
-              <text value=""/>
-            </properties>
-          </component>
-          <component id="8b06f" class="javax.swing.JButton" binding="area_btn">
-            <constraints/>
-            <properties>
-              <icon value="area_chart.png"/>
-              <text value=""/>
-            </properties>
-          </component>
+          <grid id="a5e80" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="59a3f" class="javax.swing.JButton" binding="pie_btn">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="pie_chart.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="927af" class="javax.swing.JButton" binding="line_btn">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="line_chart.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="8b06f" class="javax.swing.JButton" binding="area_btn">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="area_chart.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="f8e3c" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="30931" class="javax.swing.JButton" binding="settings_btn">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="settings_icon.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
       <grid id="15481" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -74,7 +110,6 @@
               <component id="11ee4" class="javax.swing.JButton" binding="start_stop_btn">
                 <constraints/>
                 <properties>
-                  <background color="-723724"/>
                   <horizontalAlignment value="0"/>
                   <icon value="start_icon.png"/>
                   <text value=""/>

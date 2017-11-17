@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Main implements PacketDump.CallbackInterface, Configuration.ProtocolLoadInterface, MessageInterface {
+public class Main implements Runnable, PacketDump.CallbackInterface, Configuration.ProtocolLoadInterface, MessageInterface {
 	
 	private static SetupWindow setupWindow;
 	private static MainWindow mainWindow;
@@ -31,39 +31,23 @@ public class Main implements PacketDump.CallbackInterface, Configuration.Protoco
 	public static void main(String[] args) throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		setupWindow.show();
-		new Main().run();
+		new Thread(new Main()).start();
 	}
 	
-	Main() {
-		new Thread(()->{
-			try {
-				ArrayList<Interface> interfaces = new WinDump().listInterfaces();
-				
-				for (Interface i : interfaces) {
-					mainWindow.addInterface(i);
-				}
-				
-			} catch(Exception e) {
-				report("Failed to read network interfaces.");
-				System.exit(1);
+	@Override
+	public void run() {
+		try {
+			ArrayList<Interface> interfaces = new WinDump().listInterfaces();
+			
+			for (Interface i : interfaces) {
+				mainWindow.addInterface(i);
 			}
-			Configuration.load(Main.this, Main.this);
-		}).start();
-	}
-	
-	public void run() throws Exception {
-/*		dump.start();
-		String str;
-		while (true) {
 			
-			str = queue.take();
-			packets.add(Packet.parse(str));
-			
-			System.out.println(str);
-			System.out.println(packets.get(packets.size() - 1));
-			System.out.println("--------------------------------");
-			
-		}*/
+		} catch(Exception e) {
+			report("Failed to read network interfaces.");
+			System.exit(1);
+		}
+		Configuration.load(Main.this, Main.this);
 	}
 	
 	@Override

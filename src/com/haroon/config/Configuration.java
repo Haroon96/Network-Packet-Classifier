@@ -8,7 +8,9 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Configuration {
@@ -32,7 +34,27 @@ public class Configuration {
 		}
 	}
 	
-	public static void save() {
+	public static void save(ArrayList<Protocol> protocols) {
+		new Thread(()->{
+			
+			try {
+				FileWriter fw = new FileWriter("data/protocols.xml");
+				fw.write("<protocols>");
+				
+				for (Protocol p : protocols) {
+					fw.write("<protocol>");
+					fw.write("<name>" + p.getName() + "</name>");
+					fw.write("<port>" + p.getPort() + "</port>");
+					fw.write("<selected>" + p.isSelected() + "</selected>");
+					fw.write("</protocol>");
+				}
+				
+				fw.write("</protocols>");
+				fw.close();
+			} catch (Exception e) {
+			
+			}
+		}).start();;
 	}
 	
 	
