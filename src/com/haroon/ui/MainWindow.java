@@ -34,8 +34,11 @@ public class MainWindow {
 	private JButton area_btn;
 	private JButton pie_btn;
 	private JButton settings_btn;
+	private JButton logBtn;
 	private JFrame frame;
 	private JFXPanel jfxPanel;
+	
+	private LogWindow logWindow;
 	
 	private int interval = 0;
 	
@@ -62,6 +65,8 @@ public class MainWindow {
 		area_btn.setFocusPainted(false);
 		pie_btn.setFocusPainted(false);
 		settings_btn.setFocusPainted(false);
+		
+		logWindow = new LogWindow();
 	}
 	
 	public void show() {
@@ -169,7 +174,6 @@ public class MainWindow {
 							for (Counter c : counters) {
 								sum_for_pie += c.getCount();
 								float percent = ((float) c.getCount() / total_packets) * 100f;
-								System.out.println(percent);
 								Series series = hashmap.get(Integer.toString(c.getPort()));
 								PieChart.addData(series.getName(), c.getCount());
 								Platform.runLater(() -> {
@@ -188,14 +192,19 @@ public class MainWindow {
 				
 				
 				packetDump.setCallback((String s) -> {
+					Packet p = Packet.parse(s);
 					synchronized (packets) {
-						packets.add(Packet.parse(s));
+						packets.add(p);
 					}
+					logWindow.addEntry(p);
 				});
 				
 				packetDump.start();
 			}
 			started = !started;
+		});
+		logBtn.addActionListener((ActionEvent e) -> {
+			logWindow.show();
 		});
 	}
 	
@@ -253,12 +262,16 @@ public class MainWindow {
 		area_btn.setText("");
 		panel3.add(area_btn, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		final JPanel panel4 = new JPanel();
-		panel4.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+		panel4.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
 		panel2.add(panel4, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		settings_btn = new JButton();
 		settings_btn.setIcon(new ImageIcon(getClass().getResource("/settings_icon.png")));
 		settings_btn.setText("");
-		panel4.add(settings_btn, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		panel4.add(settings_btn, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		logBtn = new JButton();
+		logBtn.setIcon(new ImageIcon(getClass().getResource("/log_icon.png")));
+		logBtn.setText("");
+		panel4.add(logBtn, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JPanel panel5 = new JPanel();
 		panel5.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
 		panel5.setBackground(new Color(-723724));
