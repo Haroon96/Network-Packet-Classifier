@@ -2,7 +2,6 @@ package com.haroon;
 
 import com.haroon.config.Configuration;
 import com.haroon.container.Interface;
-import com.haroon.container.Packet;
 import com.haroon.container.Protocol;
 import com.haroon.packetdump.PacketDump;
 import com.haroon.packetdump.WinDump;
@@ -21,8 +20,6 @@ public class Main implements Runnable, PacketDump.CallbackInterface, Configurati
 	private static MainWindow mainWindow;
 	
 	LinkedBlockingQueue<String> queue;
-	ArrayList<Packet> packets;
-	PacketDump dump;
 	
 	static {
 		setupWindow = new SetupWindow();

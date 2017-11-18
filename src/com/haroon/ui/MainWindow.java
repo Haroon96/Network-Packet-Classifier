@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static com.haroon.config.Configuration.LINUX;
 import static com.haroon.config.Configuration.WINDOWS;
 import static com.haroon.config.Configuration.getSelectedProtocols;
 

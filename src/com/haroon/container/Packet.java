@@ -1,7 +1,5 @@
 package com.haroon.container;
 
-import java.util.Scanner;
-
 public class Packet {
 	
 	private String time;

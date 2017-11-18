@@ -2,9 +2,6 @@ package com.haroon.chart;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 
 public class PieChart {
 	

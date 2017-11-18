@@ -2,7 +2,6 @@ package com.haroon.ui;
 
 import com.haroon.config.Configuration;
 import com.haroon.container.Protocol;
-import com.haroon.ui.interfaces.MessageInterface;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;

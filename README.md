@@ -8,7 +8,10 @@ Requires Java and JavaFX JRE and JDK. Both come bundled in Oracle's JDK. Users o
 
 ## Compilation Instructions
 Use the following included scripts for compilation.
-    Linux Users: build-run.sh
-    Windows Users: build-run.bat
+```
+Linux Users: build-run.sh
+	
+Windows Users: build-run.bat
+```
     
-javac and java binaries must be included in the path for the scripts to work.
+`javac` and `java` binaries must be included in the path for the scripts to work.
