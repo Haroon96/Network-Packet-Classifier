@@ -3,6 +3,10 @@ A Java application that monitors network traffic and generates charts detailing 
 The protocol running these packets can be identified using these port numbers but is not entirely accurate due to inherent issues in the methodology.
 The applications lets you define your own protocols and also includes several pre-defined protocols.
 
+## Running
+
+You can run the application from jar inside the `bin` folder
+
 ## Requirements
 Requires Java and JavaFX JRE and JDK. Both come bundled in Oracle's JDK. Users on Linux typically use OpenJDK and may need to setup support for JavaFX.
 
