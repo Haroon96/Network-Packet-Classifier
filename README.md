@@ -19,3 +19,5 @@ Windows Users: build-run.bat
 ```
     
 `javac` and `java` binaries must be included in the path for the scripts to work.
+
+The system must also have `tcpdump` (for Linux users) or its Windows equivalent `windump` configured and running.
