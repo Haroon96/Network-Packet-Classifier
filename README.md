@@ -10,6 +10,8 @@ You can run the application from jar inside the `bin` folder
 ## Requirements
 Requires Java and JavaFX JRE and JDK. Both come bundled in Oracle's JDK. Users on Linux typically use OpenJDK and may need to setup support for JavaFX.
 
+The system must also have `tcpdump` (for Linux users) or its Windows equivalent `windump` configured and running.
+
 ## Compilation Instructions
 Use the following included scripts for compilation.
 ```
@@ -19,5 +21,3 @@ Windows Users: build-run.bat
 ```
     
 `javac` and `java` binaries must be included in the path for the scripts to work.
-
-The system must also have `tcpdump` (for Linux users) or its Windows equivalent `windump` configured and running.
