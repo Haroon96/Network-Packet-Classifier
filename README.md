@@ -5,15 +5,20 @@ The protocol running these packets can be identified using these port numbers bu
 The application lets you define your own protocols and also includes several pre-defined protocols.
 
 ## Requirements
-Requires Java and JavaFX JRE and JDK. Both come bundled in Oracle's JDK. Users on Linux typically use OpenJDK and may need to setup support for JavaFX.
+Requires Java and JavaFX. Both come bundled in Oracle's JDK 8 which is the recommended version. Users on Linux typically have OpenJDK installed and may need to setup support for JavaFX.
 
 The system must also have `tcpdump` (for Linux users) or its Windows equivalent `windump` configured and running.
 
 ## Running
-Download the executable jar from the Release page or compile it locally.
+Download the executable jar from the [Release](https://github.com/Haroon96/Network-Packet-Classifier/releases) page or compile it locally.
 
 ## Compilation
-The included `makefile` can be used to compile the source code. To run it after compilation, use `java -cp .:lib/forms_rt.jar:resources:data com.haroon.Main` inside the `build` folder.
+### Windows
+- Compile using `javac -cp src;lib\forms_rt.jar;resources;data src\com\haroon\Main.java`
+- Run using `java -cp src;lib/forms_rt.jar;resources;data com.haroon.Main`
+
+### Ubuntu
+The included `makefile` can be used to compile the source code. After compilation, use `java -cp .:lib/forms_rt.jar:resources:data com.haroon.Main` inside the `build` folder to run the program.
     
 ## Screenshots
 <div style="display: flex;">
