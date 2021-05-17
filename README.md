@@ -14,8 +14,7 @@ Download the executable jar from the [Release](https://github.com/Haroon96/Netwo
 
 ## Compilation
 ### Windows
-- Compile using `javac -cp src;lib\forms_rt.jar;resources;data src\com\haroon\Main.java`
-- Run using `java -cp src;lib/forms_rt.jar;resources;data com.haroon.Main`
+The included `makefile.bat` runs the required commands for compiling on Windows. It generates `start.bat` in the `build` directory which can be used to run the program after compilation.
 
 ### Ubuntu
 The included `makefile` can be used to compile the source code. After compilation, use `java -cp .:lib/forms_rt.jar:resources:data com.haroon.Main` inside the `build` folder to run the program.
