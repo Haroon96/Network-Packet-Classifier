@@ -7,7 +7,13 @@ The application lets you define your own protocols and also includes several pre
 ## Requirements
 Requires Java and JavaFX. Both come bundled in Oracle's JDK 8 which is the recommended version. Users on Linux typically have OpenJDK installed and may need to setup support for JavaFX.
 
-The system must also have `tcpdump` (for Linux users) or its Windows equivalent `windump` configured and running.
+### Windows
+1. Download and install [`npcap`](https://nmap.org/download.html).
+2. Download [`WinDump for npcap`](https://github.com/hsluoyz/WinDump/releases) and add it to your PATH.
+   - Either paste it in C:\Windows\System32 or the compiled/JAR directory.
+
+### Ubuntu
+1. Install `tcpdump` using `sudo apt install tcpdump`
 
 ## Running
 Download the executable jar from the [Release](https://github.com/Haroon96/Network-Packet-Classifier/releases) page or compile it locally.
